@@ -12,10 +12,17 @@ public class Work1 {
                 {5,7,8,9,12},
                 {23,3,8,9,11}
         };
+        int[][] isMagicSquare3={
+                {8,1,6},
+                {3,5,7},
+                {1,9,1}
+        };
         System.out.println(isMAgicSquare(isMagicSquare));
         isMAgicSquare(isMagicSquare);
         System.out.println(isMAgicSquare(isMagicSquare2));
         isMAgicSquare(isMagicSquare2);
+        System.out.println(isMAgicSquare(isMagicSquare3));
+        isMAgicSquare(isMagicSquare3);
     }
     public static boolean isMAgicSquare(int[] [] matrix){
         int row = matrix.length;
@@ -39,6 +46,11 @@ public class Work1 {
             }else {
                 if (i == 0) {
                     remember = sumcol;
+                }else{
+                    if(remember!=sumcol && remember!= sumrow){
+                        System.out.print(remember + " " +sumcol +" "+  sumrow);
+                        return false;
+                    }
                 }
                 sumrow = 0;
                 sumcol = 0;
