@@ -28,7 +28,7 @@ public class PersonsRecyclerAdapter extends RecyclerView.Adapter<PersonsRecycler
     private Activity activity;
     private List<Person> toDeletePerson = new ArrayList<>();
     private ActionMode mActionMode;
-    private boolean done = false;
+    private boolean activitystarted= false;
 
 
 
@@ -86,11 +86,14 @@ public class PersonsRecyclerAdapter extends RecyclerView.Adapter<PersonsRecycler
                 myclick.OnClickListener(person);
             });
          itemView.setOnLongClickListener(v -> {
-             Toast.makeText(activity, mActionMode+"", Toast.LENGTH_SHORT).show();
-             if(mActionMode!=null){
-                 return false;
+//             Toast.makeText(activity, mActionMode+"", Toast.LENGTH_SHORT).show();
+//             if(mActionMode!=null){
+//                 return false;
+//             }
+             if(!activitystarted){
+                 mActionMode = activity.startActionMode(actionModeCallBack);
+                 activitystarted=true;
              }
-             mActionMode = activity.startActionMode(actionModeCallBack);
              if(person.isChecked()== false){
                  person.setChecked(true);
                  itemView.setBackgroundColor(Color.parseColor("#8f9595"));
@@ -100,7 +103,7 @@ public class PersonsRecyclerAdapter extends RecyclerView.Adapter<PersonsRecycler
                  clear();
                  toDeletePerson.remove(person);
              }
-             mActionMode = null;
+//             mActionMode = null;
              return true;
          });
         }
@@ -162,8 +165,10 @@ public class PersonsRecyclerAdapter extends RecyclerView.Adapter<PersonsRecycler
 
      @Override
      public void onDestroyActionMode(ActionMode mode) {
-         Toast.makeText(activity, mActionMode+"", Toast.LENGTH_SHORT).show();
+//         Toast.makeText(activity, mActionMode+"", Toast.LENGTH_SHORT).show();
          mActionMode = null;
+         removeSelection();
+         activitystarted=false;
      }
  };
 
