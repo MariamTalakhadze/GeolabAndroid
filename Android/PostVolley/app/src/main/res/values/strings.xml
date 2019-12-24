@@ -1,0 +1,5 @@
+<resources>
+    <string name="Delete">Delete</string>
+    <string name="Update">Update</string>
+    <string name="app_name">post_volley_sql</string>
+</resources>
